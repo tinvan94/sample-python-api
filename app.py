@@ -1,6 +1,5 @@
 from flask import Blueprint
 from flask_restful import Api
-from resources.hello import Hello
 from resources.customer import CustomerResource
 
 api_bp = Blueprint('api', __name__)
