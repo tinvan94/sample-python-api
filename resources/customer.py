@@ -1,11 +1,13 @@
 from flask import request
 from flask_restful import Resource
 from Model import db, Customers, CustomerSchema
+from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
 customers_schema = CustomerSchema(many=True)
 customer_schema = CustomerSchema()
 
 class CustomerResource(Resource):
+    @jwt_required
     def get(self, customer_id=False):
         if customer_id:
             customer = Customers.query.filter_by(id=customer_id).first()
