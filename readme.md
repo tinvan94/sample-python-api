@@ -91,5 +91,5 @@
             'Content-Type': 'application/json',
             'Authorization': Bearer <JWT>
         }
-        Param sample:{"id": "1"}
+        Param sample:{"id": "1", "name": "Test"}
 
