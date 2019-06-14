@@ -31,7 +31,7 @@
 
 * Enpoint Collects
 
-    registration
+    - registration
         POST - http://127.0.0.1:5000/api/registration
         Header:{
             'Content-Type': 'application/json'
@@ -39,7 +39,7 @@
         Param sample:{"user_name": "Test", "password": "1"}
         return: JWT
 
-    login
+    - login
         POST - http://127.0.0.1:5000/api/login
         Header:{
             'Content-Type': 'application/json'
@@ -47,7 +47,7 @@
         Param sample:{"user_name": "Test", "password": "1"}
         return: JWT
 
-    logout
+    - logout
         POST - http://127.0.0.1:5000/api/logout
         Header:{
             'Content-Type': 'application/json',
@@ -55,21 +55,21 @@
         }
         Param sample:{}
 
-    get all customers
+    - get all customers
         GET - http://127.0.0.1:5000/api/customer
         Header:{
             'Content-Type': 'application/json',
             'Authorization': Bearer <JWT>
         }
 
-    get customer by id
+    - get customer by id
         GET - http://127.0.0.1:5000/api/customer/id
         Header:{
             'Content-Type': 'application/json',
             'Authorization': Bearer <JWT>
         }
 
-    create a new customer
+    - create a new customer
         POST - http://127.0.0.1:5000/api/customer
         Headder:{
             'Content-Type': 'application/json',
@@ -77,7 +77,7 @@
         }
         Param sample:{"name": "Test" "dob": "11/11/1993"}
 
-    update info customer
+    - update info customer
         PUT - http://127.0.0.1:5000/api/customer
         Headder:{
             'Content-Type': 'application/json',
@@ -85,7 +85,7 @@
         }
         Param sample:{"id": "1", "name": "Test" "dob": "11/11/1993"}
 
-    delete customer
+    - delete customer
         DELETE - http://127.0.0.1:5000/api/customer
         Headder:{
             'Content-Type': 'application/json',
