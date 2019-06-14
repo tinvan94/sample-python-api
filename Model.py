@@ -49,3 +49,18 @@ class UserSchema(ma.Schema):
     user_name = fields.String(required=True, validate=validate.Length(1))
     password = fields.String(required=True, validate=validate.Length(1))
 
+class RevokedToken(db.Model):
+    __tablename__ = 'revoked_tokens'
+    id = db.Column(db.Integer, primary_key=True)
+    jti = db.Column(db.String(120))
+
+    def __init__(self, jti):
+        self.jti = jti
+    
+    def add(self):
+        db.session.add(self)
+        db.session.commit()
+
+class RevokedTokenSchema(ma.Schema):
+    id = fields.Integer(dump_only=True)
+    jti = fields.String(required=True, validate=validate.Length(1))

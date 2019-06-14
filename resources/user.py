@@ -1,6 +1,6 @@
 from flask import request
 from flask_restful import Resource
-from Model import db, Users, UserSchema
+from Model import db, Users, UserSchema, RevokedToken, RevokedTokenSchema
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 
 users_schema = UserSchema(many=True)
@@ -65,3 +65,14 @@ class UserLogin(Resource):
             }
         else:
             return {'message': 'Wrong credentials'}
+
+class UserLogout(Resource):
+    @jwt_required
+    def post(self):
+        jti = get_raw_jwt()['jti']
+        try:
+            revoked_token = RevokedToken(jti=jti)
+            revoked_token.add()
+            return {'message': 'Access token has been revoked'}
+        except:
+            return {'message': 'Something went wrong'}, 500

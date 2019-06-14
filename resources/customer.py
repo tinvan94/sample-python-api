@@ -64,7 +64,7 @@ class CustomerResource(Resource):
         if not json_data:
                return {'message': 'No input data provided'}, 400
         customer_id = json_data['id']
-        customer = Customers.query.filter_by(id=customer_id).delete()
+        Customers.query.filter_by(id=customer_id).delete()
         db.session.commit()
 
         return { "status": 'delete success'}, 201

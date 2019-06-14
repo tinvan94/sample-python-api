@@ -1,4 +1,5 @@
 from flask import Flask
+from Model import RevokedToken
 
 def create_app(config_filename):
     app = Flask(__name__)
@@ -9,7 +10,13 @@ def create_app(config_filename):
     from Model import db
     db.init_app(app)
     from flask_jwt_extended import JWTManager
-    JWTManager(app)
+    jwt = JWTManager(app)
+
+    @jwt.token_in_blacklist_loader
+    def check_if_token_in_blacklist(decrypted_token):
+        jti = decrypted_token['jti']
+        query = RevokedToken.query.filter_by(jti=jti).first()
+        return query
 
     return app
 
