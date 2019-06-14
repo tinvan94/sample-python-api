@@ -20,6 +20,7 @@ class CustomerResource(Resource):
         customers = customers_schema.dump(customers).data
         return {'status': 'success', 'data': customers}, 200
 
+    @jwt_required
     def post(self):
         json_data = request.get_json(force=True)
         if not json_data:
@@ -40,6 +41,7 @@ class CustomerResource(Resource):
 
         return { "status": 'success', 'data': result }, 201
 
+    @jwt_required
     def put(self):
         json_data = request.get_json(force=True)
         customer_id = json_data['id']
@@ -59,6 +61,7 @@ class CustomerResource(Resource):
         result = customer_schema.dump(customer).data
         return { "status": 'success', 'data': result }, 201
 
+    @jwt_required
     def delete(self):
         json_data = request.get_json(force=True)
         if not json_data:
